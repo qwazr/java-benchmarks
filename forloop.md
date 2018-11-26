@@ -8,23 +8,26 @@ This benchmark compares the speed performance of several methods.
 Benchmark results
 -----------------
 
-| Benchmark                                           | Mode    | Cnt |      Score  |  Error   | Units |
-| --------------------------------------------------- | ------- | --- | ----------- | -------- | ----- |
-| ForLoopBenchmark.usingForEachMethod                 | avgt    | 3   |  7242.168 ± | 1940.501 | ns/op |
-| ForLoopBenchmark.usingForEachMethodSync             | avgt    | 3   |  7666.807 ± | 1883.873 | ns/op |
-| ForLoopBenchmark.usingIteratorMethods               | avgt    | 3   |  7130.437 ± |   68.214 | ns/op |
-| ForLoopBenchmark.usingIteratorMethodsSync           | avgt    | 3   |  7180.647 ± | 1606.271 | ns/op |
-| ForLoopBenchmark.usingIteratorWithFor               | avgt    | 3   |  6622.754 ± |  862.600 | ns/op |
-| ForLoopBenchmark.usingIteratorWithForSync           | avgt    | 3   |  6413.721 ± |   33.421 | ns/op |
-| ForLoopBenchmark.usingSizeAndGetMethod              | avgt    | 3   |  6419.240 ± |  318.117 | ns/op |
-| ForLoopBenchmark.usingSizeAndGetMethodSync          | avgt    | 3   | 49199.728 ± | 2651.059 | ns/op |
-| ForLoopBenchmark.usingSizeVariableAndGetMethod      | avgt    | 3   |  6419.165 ± |  255.867 | ns/op |
-| ForLoopBenchmark.usingSizeVariableAndGetMethodSync  | avgt    | 3   | 39540.630 ± | 1632.151 | ns/op |
-| ForLoopBenchmark.usingStreamForEachMethod           | avgt    | 3   |  6687.496 ± |  698.062 | ns/op |
-| ForLoopBenchmark.usingStreamForEachMethodSync       | avgt    | 3   |  6690.605 ± |  886.787 | ns/op |
+| Benchmark                          |      Score  |  Error   | Units |
+| -----------------------------------| ----------- | -------- | ----- |
+| usingForEachMethod                 |  7242.168 ± | 1940.501 | ns/op |
+| usingForEachMethodSync             |  7666.807 ± | 1883.873 | ns/op |
+| usingIteratorMethods               |  7130.437 ± |   68.214 | ns/op |
+| usingIteratorMethodsSync           |  7180.647 ± | 1606.271 | ns/op |
+| usingIteratorWithFor               |  6622.754 ± |  862.600 | ns/op |
+| usingIteratorWithForSync           |  6413.721 ± |   33.421 | ns/op |
+| usingSizeAndGetMethod              |  6419.240 ± |  318.117 | ns/op |
+| usingSizeAndGetMethodSync          | 49199.728 ± | 2651.059 | ns/op |
+| usingSizeVariableAndGetMethod      |  6419.165 ± |  255.867 | ns/op |
+| usingSizeVariableAndGetMethodSync  | 39540.630 ± | 1632.151 | ns/op |
+| usingStreamForEachMethod           |  6687.496 ± |  698.062 | ns/op |
+| usingStreamForEachMethodSync       |  6690.605 ± |  886.787 | ns/op |
 
-using list.forEach() method
----------------------------
+
+Benchmark code
+--------------
+
+### using list.forEach() method
 
 A natural way to iterate is the use of the list.forEach() method.
 
@@ -41,8 +44,7 @@ private long usingForEachMethod(final List<Integer> list) {
 }
 ```
     
-Using Iterator methods
-----------------------
+### Using Iterator methods
 
 Using the iterator is the natural way to iterate on a collection.
 
@@ -57,8 +59,8 @@ private long usingIteratorMethods(final List<Integer> list) {
     return total;
 }
 ```
-using iterator with for
------------------------
+
+### using iterator with for
 
 The [enhanced Java loop](https://blogs.oracle.com/corejavatechtips/using-enhanced-for-loops-with-your-classes)
 uses the iterator provided by the collection.
@@ -74,8 +76,7 @@ private long usingIteratorWithFor(final List<Integer> list) {
 }
 ```
 
-using list.size() And list.get() methods
-----------------------------------------
+### using list.size() And list.get() methods
 
 On each iteration both the list.size() and list.get() methods are called.
 
@@ -92,8 +93,7 @@ private long usingSizeAndGetMethod(final List<Integer> list) {
 }
 ```
 
-using a size local variable and the list.get() method
------------------------------------------------------
+### using a size local variable and the list.get() method
 
 On each iteration the list.get() method is called.
 
@@ -113,8 +113,7 @@ private long usingSizeVariableAndGetMethod(final List<Integer> list) {
 }
 ```
 
-using list.stream() and stream.forEach() methods
-------------------------------------------------
+###  using list.stream() and stream.forEach() methods
 
 List provides also a stream and its forEach method.
 
@@ -130,3 +129,14 @@ private long usingStreamForEachMethod(final List<Integer> list) {
     return summer.total;
 }
 ```
+
+Benchmark analysis
+------------------
+
+Quite all methods are similar in term of performances.
+
+However, two forms should be avoid, due to the especially bad performances when using
+synchronized collections:
+
+- usingSizeAndGetMethod
+- usingSizeVariableAndGetMethod
