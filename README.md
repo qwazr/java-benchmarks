@@ -1,7 +1,7 @@
 JAVA loop iteration performance
 ===============================
 
-There is few ways to iterator on a collection using JAVA.
+There is few ways to iterate through a collection using JAVA.
 This benchmark compare the speed performance of several methods.
 
 The benchmark has been made with [JMH - Java Microbenchmark Harness](https://openjdk.java.net/projects/code-tools/jmh/).
@@ -29,7 +29,8 @@ Using Iterator methods
 ----------------------
 
 Using the iterator is the natural way to iterate on a collection.
-This is the third fastest method either used with a synchronized collection or not.
+
+This is the **third fastest** method either used with a synchronized collection or not.
 
 ```java
 private long usingIteratorMethods(final List<Integer> list) {
@@ -40,11 +41,13 @@ private long usingIteratorMethods(final List<Integer> list) {
     return total;
 }
 ```
-using Iterator With For
+using iterator with for
 -----------------------
 
-The enhanced Java loop uses the iterator provided by the collection.
-This is the second fastest method either used with a synchronized collection or not.
+The [enhanced Java loop](https://blogs.oracle.com/corejavatechtips/using-enhanced-for-loops-with-your-classes)
+uses the iterator provided by the collection.
+
+This is the **second fastest** method either used with a synchronized collection or not.
 
 ```java
 private long usingIteratorWithFor(final List<Integer> list) {
@@ -55,11 +58,13 @@ private long usingIteratorWithFor(final List<Integer> list) {
 }
 ```
 
-using Size And Get Method
--------------------------
+using list.size() And list.get() methods
+----------------------------------------
 
 On each iteration both the list.size() and list.get() methods are called.
+
 This method is the second fastest until you use a synchronized collection.
+
 **When the collection is synchronized, this is the worse choice.**
 
 ```java
@@ -71,12 +76,15 @@ private long usingSizeAndGetMethod(final List<Integer> list) {
 }
 ```
 
-using Size Variable And Get Method
-----------------------------------
+using a size local variable and the list.get() method
+-----------------------------------------------------
 
-On each iteration only the list.get() method is called.
-The size of the collection has been store in a local variable.
-This method is the fastest until you use a synchronized collection.
+On each iteration the list.get() method is called.
+
+The size of the collection is stored in a local variable.
+
+This method is **the fastest** until you use a synchronized collection.
+
 **When the collection is synchronized, this is the second worse choice**
 
 ```java
