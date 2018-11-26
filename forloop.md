@@ -1,9 +1,9 @@
-JAVA loop iteration performance
-===============================
+Java For loop iteration performance
+===================================
 
-There is few ways to iterate through a collection using JAVA.
+There is few ways to iterate through a collection with Java.
 
-This benchmark compare the speed performance of several methods.
+This benchmark compares the speed performance of several methods.
 
 Benchmark results
 -----------------
