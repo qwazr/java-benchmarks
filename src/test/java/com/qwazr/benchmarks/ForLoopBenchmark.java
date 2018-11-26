@@ -126,4 +126,42 @@ public class ForLoopBenchmark {
     public long usingIteratorMethodsSync(final LoopState state) {
         return usingIteratorMethods(state.synchonizedList);
     }
+
+    private long usingForEachMethod(final List<Integer> list) {
+        final class Summer {
+            long total = 0;
+        }
+        final Summer summer = new Summer();
+        list.forEach(value -> summer.total += value);
+        return summer.total;
+    }
+
+    @Benchmark
+    public long usingForEachMethod(final LoopState state) {
+        return usingForEachMethod(state.arrayList);
+    }
+
+    @Benchmark
+    public long usingForEachMethodSync(final LoopState state) {
+        return usingForEachMethod(state.synchonizedList);
+    }
+
+    private long usingStreamForEachMethod(final List<Integer> list) {
+        final class Summer {
+            long total = 0;
+        }
+        final Summer summer = new Summer();
+        list.stream().forEach(value -> summer.total += value);
+        return summer.total;
+    }
+
+    @Benchmark
+    public long usingStreamForEachMethod(final LoopState state) {
+        return usingStreamForEachMethod(state.arrayList);
+    }
+
+    @Benchmark
+    public long usingStreamForEachMethodSync(final LoopState state) {
+        return usingStreamForEachMethod(state.synchonizedList);
+    }
 }
