@@ -2,16 +2,19 @@ JAVA loop iteration performance
 ===============================
 
 There is few ways to iterate through a collection using JAVA.
+
 This benchmark compare the speed performance of several methods.
 
 The benchmark has been made with [JMH - Java Microbenchmark Harness](https://openjdk.java.net/projects/code-tools/jmh/).
-The project is a typical JAVA [Gradle](https://gradle.org/ project).
+
+The project is a typical JAVA [Gradle](https://gradle.org/) project.
 
 To run it, just use the following command:
 
     gradle jmh
 
-Here is the result of the benchmark:
+Benchmark results
+-----------------
 
 | Benchmark                                           | Mode    | Cnt |       Score  |  Error    | Units |
 | --------------------------------------------------- | ------- | --- | ------------ | --------- | ----- |
